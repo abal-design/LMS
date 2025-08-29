@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { MenuIcon } from "@heroicons/react/outline";
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000"; // Adjust if needed
+const API_BASE_URL = "https://lms-lm11.onrender.com"; // Adjust if needed
 
 const Dashboard = () => {
   const navigate = useNavigate();

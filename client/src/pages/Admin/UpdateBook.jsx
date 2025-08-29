@@ -34,7 +34,7 @@ const UpdateBook = () => {
 
   const fetchBooks = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/books");
+      const res = await axios.get("https://lms-lm11.onrender.com/api/books");
       setBooks(res.data);
     } catch (err) {
       console.error("Error fetching books:", err);
@@ -65,7 +65,7 @@ const UpdateBook = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/books/${editingBook}`,
+        `https://lms-lm11.onrender.com/api/books/${editingBook}`,
         formData
       );
 

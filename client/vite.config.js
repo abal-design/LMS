@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:5000",  // your backend server
+        target: "https://lms-lm11.onrender.com",  // my backend server
         changeOrigin: true,
         secure: false,
       },

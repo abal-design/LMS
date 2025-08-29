@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import axios from "axios";
 import PromotionCarousel from "./PromotionCarousel"; // import the carousel component
-import Logo from "../../assets/Logo.png"
 
 const promotions = [
   {

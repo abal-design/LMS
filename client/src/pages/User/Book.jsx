@@ -21,7 +21,7 @@ const BookPage = () => {
     const fetchBooks = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/api/books", {
+        const res = await axios.get("https://lms-lm11.onrender.com/api/books", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -49,7 +49,7 @@ const handleBorrow = async (bookId) => {
     const userId = decoded.id; // 👈 extract userId from token
 
     const res = await axios.post(
-      "http://localhost:5000/api/borrows",
+      "https://lms-lm11.onrender.com/api/borrows",
       { bookId, userId }, // 👈 send both
       { headers: { Authorization: `Bearer ${token}` } }
     );

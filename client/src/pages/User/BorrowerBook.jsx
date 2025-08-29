@@ -21,7 +21,7 @@ const BorrowerBook = () => {
         return;
       }
 
-      const res = await axios.get("http://localhost:5000/api/borrows/user", {
+      const res = await axios.get("https://lms-lm11.onrender.com/api/borrows/user", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -49,7 +49,7 @@ const BorrowerBook = () => {
       }
 
       const res = await axios.post(
-        "http://localhost:5000/api/borrows/return",
+        "https://lms-lm11.onrender.com/api/borrows/return",
         { borrowId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
