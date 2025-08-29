@@ -17,7 +17,7 @@ const BorrowRequestsPage = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        `${API_BASE_URL}/api/borrows/records`,
+        `https://lms-lm11.onrender.com/api/borrows/records`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -44,7 +44,7 @@ const BorrowRequestsPage = () => {
       const token = localStorage.getItem("token");
       if (token) {
         await axios.post(
-          `${API_BASE_URL}/api/users/logout`,
+          `https://lms-lm11.onrender.com/api/users/logout`,
           {},
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -72,7 +72,7 @@ const BorrowRequestsPage = () => {
       }
 
       await axios.put(
-        `${API_BASE_URL}/api/borrows/${id}`,   // ✅ use id from map
+        `https://lms-lm11.onrender.com/api/borrows/${id}`,   // ✅ use id from map
         { status: newStatus },                       // ✅ send correct status
         { headers: { Authorization: `Bearer ${token}` } }
       );

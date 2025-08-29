@@ -21,13 +21,14 @@ const EditUser = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
+      
 
-      const res = await axios.get(
-        `https://lms-lm11.onrender.com/api/users/${userId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const res = await axios.get("https://lms-lm11.onrender.com/api/users", config);
 
       setUser(res.data); // set user data correctly
       setLoading(false);
