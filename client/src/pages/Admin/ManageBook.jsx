@@ -18,7 +18,7 @@ const BooksPage = () => {
         const config = token
           ? { headers: { Authorization: `Bearer ${token}` } }
           : {};
-        const res = await axios.get("/api/books", config);
+        const res = await axios.get(`https://lms-lm11.onrender.com/api/books`, config);
         setBooks(res.data);
       } catch (error) {
         console.error("Error fetching books:", error);
