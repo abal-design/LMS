@@ -41,7 +41,7 @@ const Login = () => {
     setLoading(true);
   
     try {
-      const res = await axios.post("https://lms-lm11.onrender.com/api/auth/login", { email, password });
+      const res = await axios.post("/api/auth/login", { email, password });
       const { token, role, name, user } = res.data;
 
      
