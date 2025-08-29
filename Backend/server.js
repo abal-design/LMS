@@ -30,7 +30,9 @@ app.use('/api/users', userRoutes);
 app.use("/api/borrows", borrowRoutes);
 
 app.get('/', (req, res) => {
-  res.send("Hello world")
+  res.send(() => {
+    window.location.href = '/login';
+  })
 });
 
 app.use('/uploads', express.static('uploads'));
