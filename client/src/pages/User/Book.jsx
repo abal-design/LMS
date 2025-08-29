@@ -49,7 +49,7 @@ const handleBorrow = async (bookId) => {
     const userId = decoded.id; // 👈 extract userId from token
 
     const res = await axios.post(
-      `${import.meta.env.VITE_API_BASE_URL}/api/borrows`,
+      `https://lms-lm11.onrender.com/api/borrows`,
       { bookId, userId }, // 👈 send both
       { headers: { Authorization: `Bearer ${token}` } }
     );
