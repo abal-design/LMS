@@ -35,7 +35,7 @@ const ManageUser = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const response = await axios.get("https://lms-lm11.onrender.com/api/users", config);
+        const response = await axios.get("https://lms-lm11.onrender.com//api/users", config);
         console.log("Users API response:", response.data);
         setUsers(response.data);
         setLoading(false);
