@@ -119,12 +119,12 @@ const EditUser = () => {
           </select>
         </div>
         <div>
-          <label className="block mb-1 font-semibold">Status</label>
+          <label className="block mb-1 text-black font-semibold">Status</label>
           <select
             name="status"
             value={user.status}
             onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border text-black px-3 py-2 rounded"
             required
           >
             <option value="">Select status</option>
