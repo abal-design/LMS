@@ -24,7 +24,7 @@ const EditUser = () => {
         const config = {
           headers: { Authorization: `Bearer ${token}` },
         };
-        const res = await axios.get(`https://lms-lm11.onrender.com/api/users/${userId}`, config);
+        const res = await axios.get(`https://lms-lm11.onrender.com/api/users/${userId}`);
         setUser(res.data);
         setLoading(false);
       } catch (err) {
