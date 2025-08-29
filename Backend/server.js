@@ -5,20 +5,21 @@ const authRoutes = require('./routes/authRoutes');
 const bookRoutes = require('./routes/bookRoutes');
 const borrowRoutes = require('./routes/borrowRoutes');
 const { errorHandler } = require('./middleware/errorMiddleware');
-const cors = require("cors");
-const bcrypt = require("bcryptjs");
-const path = require("path");
-const userRoutes = require("./routes/userRoutes"); // import your user model
+const cors = require('cors');
+const bcrypt = require('bcryptjs');
+const path = require('path');
+const userRoutes = require('./routes/userRoutes'); // import your user model
 const reportRoutes = require('./routes/reportRoutes');
 const app = express();
-
-
 
 dotenv.config();
 connectDB();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://studyhub-lms.netlify.app/', // your Netlify URL
+  credentials: true
+}));
 
 // Routes
 
@@ -27,14 +28,13 @@ app.use('/api/reports', reportRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/users', userRoutes);
-app.use("/api/borrows", borrowRoutes);
+app.use('/api/borrows', borrowRoutes);
 
 
 app.use('/uploads', express.static('uploads'));
 // app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Global error handler
 app.use(errorHandler);
-
 
 
 

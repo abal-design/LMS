@@ -34,27 +34,25 @@ const Login = () => {
     return true;
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-  
+
     const { email, password } = userData;
     setLoading(true);
-  
+
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
-      const { token, role, name, user } = res.data;
+      const res = await axios.post(
+        `${API_BASE_URL}/auth/login`,
+        { email, password }
+      );
+      const { token, role, user } = res.data;
 
-     
       localStorage.setItem("token", token);
-      // localStorage.setItem("token", res.data.token);
-      localStorage.setItem("name", res.data.user.name);
-      localStorage.setItem("role", res.data.user.role);
-      localStorage.setItem("email", res.data.user.email);
-      localStorage.setItem("profilePicture", res.data.user.profilePicture || "");
-
-   
+      localStorage.setItem("name", user.name);
+      localStorage.setItem("role", user.role);
+      localStorage.setItem("email", user.email);
+      localStorage.setItem("profilePicture", user.profilePicture || "");
 
       // Redirect based on role (case-insensitive)
       if (role.toLowerCase() === "librarian") navigate("/admin/dashboard");
@@ -69,7 +67,6 @@ const Login = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
