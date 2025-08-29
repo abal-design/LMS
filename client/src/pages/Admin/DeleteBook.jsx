@@ -15,7 +15,7 @@ const DeleteBook = () => {
     try {
       const token = localStorage.getItem("token");
       const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-      const res = await axios.get("/api/books", config);
+      const res = await axios.get("https://lms-lm11.onrender.com/api/books");
       setBooks(res.data);
     } catch (error) {
       console.error("Error fetching books:", error);
@@ -55,7 +55,7 @@ const DeleteBook = () => {
     try {
       const token = localStorage.getItem("token");
       const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-      await axios.delete(`/api/books/${id}`, config);
+      await axios.delete(`https://lms-lm11.onrender.com/api/books/${id}`, config);
     
       setBooks((prev) => prev.filter((book) => book._id !== id));
       alert("Book deleted successfully!");
