@@ -10,13 +10,13 @@ const bcrypt = require("bcryptjs");
 const path = require("path");
 const userRoutes = require("./routes/userRoutes"); // import your user model
 const reportRoutes = require('./routes/reportRoutes');
+const app = express();
 
 
 
 dotenv.config();
 connectDB();
 
-const app = express();
 app.use(express.json());
 app.use(cors());
 
@@ -28,8 +28,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/users', userRoutes);
 app.use("/api/borrows", borrowRoutes);
+
 app.get('/', (req, res) => {
-  res.send("It is working");
+  res.send("Hello world")
 });
 
 app.use('/uploads', express.static('uploads'));
