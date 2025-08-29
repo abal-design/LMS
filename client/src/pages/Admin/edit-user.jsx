@@ -21,10 +21,10 @@ const EditUser = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem("token");
-        const config = {
+        
+        await axios.delete(`https://lms-lm11.onrender.com/api/users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
-        };
-        const res = await axios.get(`https://lms-lm11.onrender.com/api/users/${userId}`);
+        });
         setUser(res.data);
         setLoading(false);
       } catch (err) {
