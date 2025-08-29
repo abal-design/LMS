@@ -58,7 +58,7 @@ const ManageUser = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`/api/users/${userId}`, {
+      await axios.delete(`https://lms-lm11.onrender.com/api/users/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

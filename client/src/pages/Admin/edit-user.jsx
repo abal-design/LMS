@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const EditUser = () => {
   const { userId } = useParams();
@@ -25,7 +24,7 @@ const EditUser = () => {
         const config = {
           headers: { Authorization: `Bearer ${token}` },
         };
-        const res = await axios.get(`${API_BASE_URL}/api/users/${userId}`, config);
+        const res = await axios.get(`https://lms-lm11.onrender.com/api/users/${userId}`, config);
         setUser(res.data);
         setLoading(false);
       } catch (err) {
@@ -45,7 +44,7 @@ const EditUser = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `${API_BASE_URL}/api/users/${userId}`,
+        `https://lms-lm11.onrender.com/api/users/${userId}`,
         user,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -62,7 +61,7 @@ const EditUser = () => {
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
-      await axios.post(`${API_BASE_URL}/api/users/logout`, {}, config);
+      await axios.post(`https://lms-lm11.onrender.com/api/users/logout`, {}, config);
       localStorage.removeItem("token");
       navigate("/login");
     } catch (err) {
