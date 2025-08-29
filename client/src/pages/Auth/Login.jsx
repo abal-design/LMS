@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Login = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({ email: "", password: "" });
@@ -32,7 +34,7 @@ const Login = () => {
     return true;
   };
 
-// ...existing code...
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -41,7 +43,7 @@ const Login = () => {
     setLoading(true);
   
     try {
-      const res = await axios.post("/api/auth/login", { email, password });
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, { email, password });
       const { token, role, name, user } = res.data;
 
      
