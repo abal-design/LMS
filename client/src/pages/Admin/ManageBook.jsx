@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png"; // adjust path to your logo
 import { MenuIcon } from "@heroicons/react/outline"; // example icon
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 const BooksPage = () => {
   const [books, setBooks] = useState([]);
@@ -20,7 +20,7 @@ const BooksPage = () => {
         const config = token
           ? { headers: { Authorization: `Bearer ${token}` } }
           : {};
-        const res = await axios.get(`${API_BASE_URL}/api/books`, config);
+        const res = await axios.get("https://lms-lm11.onrender.com/api/books");
         setBooks(res.data);
       } catch (error) {
         console.error("Error fetching books:", error);
