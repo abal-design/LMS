@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { MenuIcon } from "@heroicons/react/outline"; // example icon
+import { MenuIcon } from "@heroicons/react/outline";
 import Logo from "../../assets/logo.png";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const BorrowRequestsPage = () => {
   const [requests, setRequests] = useState([]);
@@ -14,9 +16,12 @@ const BorrowRequestsPage = () => {
   const fetchRequests = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("https://lms-lm11.onrender.com/api/borrows/records", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        `${API_BASE_URL}/api/borrows/records`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setRequests(res.data);
     } catch (err) {
       console.error("Error fetching borrow requests:", err);
@@ -39,7 +44,7 @@ const BorrowRequestsPage = () => {
       const token = localStorage.getItem("token");
       if (token) {
         await axios.post(
-          "/api/users/logout",
+          `${API_BASE_URL}/api/users/logout`,
           {},
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -67,7 +72,7 @@ const BorrowRequestsPage = () => {
       }
 
       await axios.put(
-        `https://lms-lm11.onrender.com/api/borrows/${id}`,   // ✅ use id from map
+        `${API_BASE_URL}/api/borrows/${id}`,   // ✅ use id from map
         { status: newStatus },                       // ✅ send correct status
         { headers: { Authorization: `Bearer ${token}` } }
       );

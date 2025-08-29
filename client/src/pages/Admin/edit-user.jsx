@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const EditUser = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
@@ -20,9 +22,10 @@ const EditUser = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem("token");
-        const res = await axios.get(`/api/users/${userId}`, {
+        const config = {
           headers: { Authorization: `Bearer ${token}` },
-        });
+        };
+        const res = await axios.get(`${API_BASE_URL}/api/users/${userId}`, config);
         setUser(res.data);
         setLoading(false);
       } catch (err) {
@@ -42,7 +45,7 @@ const EditUser = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `/api/users/${userId}`,
+        `${API_BASE_URL}/api/users/${userId}`,
         user,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -50,6 +53,20 @@ const EditUser = () => {
       navigate("/admin/manage-user");
     } catch (err) {
       setError("Failed to update user");
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      await axios.post(`${API_BASE_URL}/api/users/logout`, {}, config);
+      localStorage.removeItem("token");
+      navigate("/login");
+    } catch (err) {
+      setError("Failed to logout");
     }
   };
 
@@ -126,6 +143,14 @@ const EditUser = () => {
           </button>
         </div>
       </form>
+      <div className="mt-6">
+        <button
+          onClick={handleLogout}
+          className="w-full bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };
