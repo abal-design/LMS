@@ -43,11 +43,9 @@ const EditUser = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(
-        `https://lms-lm11.onrender.com/api/users/${userId}`,
-        user,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await axios.put(`https://lms-lm11.onrender.com/api/users/${userId}`,user, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
       alert("User updated successfully!");
       navigate("/admin/manage-user");
     } catch (err) {
@@ -61,7 +59,9 @@ const EditUser = () => {
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
-      await axios.post(`https://lms-lm11.onrender.com/api/users/logout`, {}, config);
+      await axios.post(`https://lms-lm11.onrender.com/api/users/logout`, {}, 
+         {headers: { Authorization: `Bearer ${token}` },
+      });
       localStorage.removeItem("token");
       navigate("/login");
     } catch (err) {
