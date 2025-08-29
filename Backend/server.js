@@ -28,9 +28,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/users', userRoutes);
 app.use("/api/borrows", borrowRoutes);
-app.get('/',(res, req)=>{
-  res.send("It is working")
-})
+app.get('/', (req, res) => {
+  res.send("It is working");
+});
 
 app.use('/uploads', express.static('uploads'));
 // app.use("/uploads", express.static(path.join(__dirname, "uploads")));
