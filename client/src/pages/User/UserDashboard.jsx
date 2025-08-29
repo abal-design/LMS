@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import axios from "axios";
 import PromotionCarousel from "./PromotionCarousel"; // import the carousel component
 
+
 const promotions = [
   {
     image: "https://iic.edu.np/image/new-homebanner.png",
@@ -48,7 +49,10 @@ const UserDashboard = () => {
         const config = token
           ? { headers: { Authorization: `Bearer ${token}` } }
           : {};
-        const res = await axios.get("https://lms-lm11.onrender.com/api/books", config);
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/api/books`,
+          config
+        );
         setBooks(res.data);
       } catch (error) {
         console.error("Error fetching books:", error);

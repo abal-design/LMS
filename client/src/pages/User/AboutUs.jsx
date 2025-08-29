@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AbalImage from "../../assets/Abal.jpg";
 
+
 const AboutUs = () => {
   return (
     <div className="flex flex-col min-h-screen">

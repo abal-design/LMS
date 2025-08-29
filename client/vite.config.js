@@ -12,11 +12,7 @@ export default defineConfig({
   plugins: [react(),tailwinndcss()],
   server: {
     proxy: {
-      "/api": {
-        target: "https://lms-lm11.onrender.com",  // my backend server
-        changeOrigin: true,
-        secure: false,
-      },
+      '/api': 'https://lms-lm11.onrender.com',
     },
   },
 });
