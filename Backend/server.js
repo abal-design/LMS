@@ -29,11 +29,6 @@ app.use('/api/books', bookRoutes);
 app.use('/api/users', userRoutes);
 app.use("/api/borrows", borrowRoutes);
 
-app.get('/', (req, res) => {
-  res.send(() => {
-    window.location.href = '/login';
-  })
-});
 
 app.use('/uploads', express.static('uploads'));
 // app.use("/uploads", express.static(path.join(__dirname, "uploads")));
