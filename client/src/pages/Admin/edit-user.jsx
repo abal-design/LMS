@@ -17,23 +17,28 @@ const EditUser = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        setLoading(true);
-        const token = localStorage.getItem("token");
-        
-        await axios.delete(`https://lms-lm11.onrender.com/api/users/${userId}`, {
+  const fetchUser = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+
+      const res = await axios.get(
+        `https://lms-lm11.onrender.com/api/users/${userId}`,
+        {
           headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(res.data);
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to fetch user data");
-        setLoading(false);
-      }
-    };
-    fetchUser();
-  }, [userId]);
+        }
+      );
+
+      setUser(res.data); // set user data correctly
+      setLoading(false);
+    } catch (err) {
+      setError("Failed to fetch user data");
+      setLoading(false);
+    }
+  };
+  fetchUser();
+}, [userId]);
+
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
