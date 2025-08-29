@@ -49,8 +49,7 @@ const UserDashboard = () => {
         const config = token
           ? { headers: { Authorization: `Bearer ${token}` } }
           : {};
-        const res = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URL}/api/books`,
+        const res = await axios.get(`https://lms-lm11.onrender.com/api/books`,
           config
         );
         setBooks(res.data);
