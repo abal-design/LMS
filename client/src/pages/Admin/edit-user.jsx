@@ -80,7 +80,7 @@ const EditUser = () => {
 
   return (
     <div className="max-w-md mx-auto mt-10 bg-white p-8 rounded shadow">
-      <h2 className="text-2xl font-bold mb-6 text-blue-900">Edit User</h2>
+      <h2 className="text-2xl font-bold mb-6 text-black">Edit User</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1 font-semibold">Name</label>
