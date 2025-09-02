@@ -62,6 +62,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
         <Link to="/user/book" className={`text-white ${isActive("/user/book") ? "font-bold" : ""}`}>Books</Link>
         <Link to="/user/aboutus" className={`text-white ${isActive("/user/aboutus") ? "font-bold" : ""}`}>About Us</Link>
         <Link to="/user/contact" className={`text-white ${isActive("/user/contact") ? "font-bold" : ""}`}>Contact Us</Link>
+        <Link to="/user/payment" className={`text-white ${isActive("/user/contact") ? "font-bold" : ""}`}>payment</Link>
         <Link to="/user/borrower" className={`text-white ${isActive("/user/borrower") ? "font-bold" : ""}`}>Borrow Details</Link>
       </div>
 
