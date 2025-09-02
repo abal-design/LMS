@@ -2,12 +2,14 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
+import { Eye, EyeOff } from "lucide-react"; // 👈 add this
 
 const Login = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👈 state for toggle
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,29 +34,28 @@ const Login = () => {
     return true;
   };
 
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-  
+
     const { email, password } = userData;
     setLoading(true);
-  
+
     try {
-      const res = await axios.post(`https://lms-lm11.onrender.com/api/auth/login`, { email, password });
-      const { token, role, name, user } = res.data;
+      const res = await axios.post(
+        `https://lms-lm11.onrender.com/api/auth/login`,
+        { email, password }
+      );
 
-     
+      const { token, role, user } = res.data;
+
       localStorage.setItem("token", token);
-      // localStorage.setItem("token", res.data.token);
-      localStorage.setItem("name", res.data.user.name);
-      localStorage.setItem("role", res.data.user.role);
-      localStorage.setItem("email", res.data.user.email);
-      localStorage.setItem("profilePicture", res.data.user.profilePicture || "");
+      localStorage.setItem("name", user.name);
+      localStorage.setItem("role", user.role);
+      localStorage.setItem("email", user.email);
+      localStorage.setItem("profilePicture", user.profilePicture || "");
 
-   
-
-      // Redirect based on role (case-insensitive)
+      // Redirect based on role
       if (role.toLowerCase() === "librarian") navigate("/admin/dashboard");
       else if (role.toLowerCase() === "borrower") navigate("/user/dashboard");
       else setErrorMessage("Unknown role: Access denied");
@@ -67,7 +68,6 @@ const Login = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -86,6 +86,7 @@ const Login = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Email */}
           <input
             type="email"
             name="email"
@@ -94,14 +95,27 @@ const Login = () => {
             onChange={handleChange}
             className="w-full border-2 border-blue-900 p-3 text-black rounded-xl"
           />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={userData.password}
-            onChange={handleChange}
-            className="w-full border-2 border-blue-900 text-black p-3 rounded-xl"
-          />
+
+          {/* Password with eye toggle */}
+          <div className="relative w-full">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              value={userData.password}
+              onChange={handleChange}
+              className="w-full border-2 border-blue-900 text-black p-3 rounded-xl"
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
+
+          {/* Login button */}
           <button
             type="submit"
             disabled={loading}

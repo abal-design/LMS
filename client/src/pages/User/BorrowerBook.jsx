@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -40,6 +41,8 @@ const BorrowerBook = () => {
     fetchBorrows();
   }, []);
 
+  const navigate = useNavigate();
+
   // Return book and fetch updated data
   const handleReturn = async (borrowId) => {
     try {
@@ -49,6 +52,32 @@ const BorrowerBook = () => {
         return;
       }
 
+      // Check if fine is due before returning
+      const borrow = borrows.find((b) => b._id === borrowId);
+      let fine = 0;
+      if (borrow) {
+        if (borrow.fine > 0) {
+          fine = borrow.fine;
+        } else if (
+          borrow.status === "Borrowed" &&
+          borrow.dueDate &&
+          new Date(borrow.dueDate) < new Date()
+        ) {
+          const due = new Date(borrow.dueDate);
+          const now = new Date();
+          const daysOverdue = Math.floor((now - due) / (1000 * 60 * 60 * 24));
+          const finePerDay = 10;
+          fine = daysOverdue * finePerDay;
+        }
+      }
+
+      if (fine > 0) {
+        // Navigate to payment page with borrowId and fine as state
+        navigate("/payment", { state: { borrowId, fine } });
+        return;
+      }
+
+      // No fine, proceed to return
       const res = await axios.post(
         "https://lms-lm11.onrender.com/api/borrows/return",
         { borrowId },
@@ -126,11 +155,38 @@ const BorrowerBook = () => {
                 </p>
               )}
 
-              {borrow.fine > 0 && (
-                <p className="text-red-600 font-bold mt-1">
-                  Fine: Rs. {borrow.fine}
-                </p>
-              )}
+
+              {/* Show fine if overdue and not returned */}
+              {(() => {
+                // If book is returned, show fine if any (existing logic)
+                if (borrow.fine > 0) {
+                  return (
+                    <p className="text-red-600 font-bold mt-1">
+                      Fine: Rs. {borrow.fine}
+                    </p>
+                  );
+                }
+                // If book is not returned and overdue, show calculated fine
+                if (
+                  borrow.status === "Borrowed" &&
+                  borrow.dueDate &&
+                  new Date(borrow.dueDate) < new Date()
+                ) {
+                  // Calculate days overdue
+                  const due = new Date(borrow.dueDate);
+                  const now = new Date();
+                  const daysOverdue = Math.floor((now - due) / (1000 * 60 * 60 * 24));
+                  // Assume fine per day (adjust as needed)
+                  const finePerDay = 10;
+                  const fine = daysOverdue * finePerDay;
+                  return (
+                    <p className="text-red-600 font-bold mt-1">
+                      Fine (Overdue): Rs. {fine}
+                    </p>
+                  );
+                }
+                return null;
+              })()}
 
               <p className="mt-2 text-gray-700">
                 Status:{" "}

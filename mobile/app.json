@@ -1,8 +1,7 @@
-
 {
   "expo": {
     "name": "Library Management Sysrem",
-    "slug": "mobile",
+    "slug": "lms",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/logo.png",
@@ -16,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/logo.png"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.ablebohara.mobile"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +37,19 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9b5fb77b-8e2e-45bf-b108-96b27b5415f7"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/9b5fb77b-8e2e-45bf-b108-96b27b5415f7"
+    },
+    "owner": "ablebohara"
   }
 }

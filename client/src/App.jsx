@@ -15,6 +15,7 @@ import EditUser from "./pages/Admin/edit-user";
 import DeleteBook from './pages/Admin/DeleteBook'
 import BorrowRequestPage from "./pages/Admin/BorrowRequestPage";
 import axios from 'axios';
+import Payment from "./pages/User/Payment";
 import ContactUs from './pages/User/Contact'
 import BorrowerBook from './pages/User/BorrowerBook'
 import ProfilePage from './pages/User/Profile'
@@ -49,6 +50,7 @@ function App() {
         <Route path="/admin/reset-password" element={<ResetPassword/>}/>
         <Route path="/admin/delete-book" element={<DeleteBook/>}/>
         <Route path="/admin/update-book" element={<UpdateBook/>}/>
+        <Route path="/user/payment" element={<Payment/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
     </Router>
