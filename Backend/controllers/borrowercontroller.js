@@ -143,7 +143,7 @@ const updateBorrowStatus = async (req, res) => {
       const borrowDate = borrow.borrowDate || new Date();
       borrow.borrowDate = borrowDate;
       const dueDate = new Date(borrowDate);
-      dueDate.setDate(dueDate.getDate() + 15); // +15 days
+      dueDate.setDate(dueDate.getDate() + 10); // +10 days
       borrow.returnDate = dueDate;
 
       // decrease stock

@@ -16,7 +16,13 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
     if (profilePicture) {
       setUsers((prev) => ({ ...prev, profilePicture }));
     }
-  }, []);
+    // Allow all payment-related routes to be public
+    const token = localStorage.getItem("token");
+    const publicPaths = ["/payment", "/user/payment", "/payment-success", "/user/payment-success", "/payment-fail", "/user/payment-fail"];
+    if (!token && publicPaths.every((p) => !location.pathname.startsWith(p))) {
+      navigate("/login");
+    }
+  }, [location.pathname, navigate]);
 
   const handleLogout = async () => {
     const token = localStorage.getItem("token");
@@ -62,7 +68,7 @@ const Navbar = ({ searchQuery, setSearchQuery }) => {
         <Link to="/user/book" className={`text-white ${isActive("/user/book") ? "font-bold" : ""}`}>Books</Link>
         <Link to="/user/aboutus" className={`text-white ${isActive("/user/aboutus") ? "font-bold" : ""}`}>About Us</Link>
         <Link to="/user/contact" className={`text-white ${isActive("/user/contact") ? "font-bold" : ""}`}>Contact Us</Link>
-        <Link to="/user/payment" className={`text-white ${isActive("/user/contact") ? "font-bold" : ""}`}>payment</Link>
+        <Link to="/user/payment" className={`text-white ${isActive("/user/payment") ? "font-bold" : ""}`}>Payment</Link>
         <Link to="/user/borrower" className={`text-white ${isActive("/user/borrower") ? "font-bold" : ""}`}>Borrow Details</Link>
       </div>
 
