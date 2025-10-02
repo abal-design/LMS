@@ -14,11 +14,11 @@ const Payment = () => {
   const navigate = useNavigate();
   const { fine, borrowId } = location.state || {};
 
-//   React.useEffect(() => {
-//     if (!fine || !borrowId) {
-//       navigate('/');
-//     }
-//   }, [fine, borrowId, navigate]);
+  React.useEffect(() => {
+    if (!fine || !borrowId) {
+      navigate('/');
+    }
+  }, [fine, borrowId, navigate]);
 
   return (
   <div className="flex flex-col min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 bg-amber-50">
