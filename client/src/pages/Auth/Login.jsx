@@ -115,6 +115,9 @@ const Login = () => {
             </button>
           </div>
 
+          <p>use user email to themailofsuwan@gmail.com</p>
+          <p>password to 12345678</p>
+          
           {/* Login button */}
           <button
             type="submit"
